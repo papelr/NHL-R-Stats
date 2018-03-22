@@ -10,6 +10,7 @@ library(multcomp)
 library(fpc)
 library(gridExtra)
 library(tibble)
+library(ggplot2)
 
 
 ###----------------------------------------------------------------###
@@ -22,16 +23,16 @@ TopFour.Selected <- TopFour[, c("G", "CorsiFor", "xGF")]
 set.seed(500)
 
 TopFourClusters <- clusGap(TopFour.Selected, FUN = kmeans, K.max = 10, B = 3)
-findClusters
-plot(findClusters)
+TopFourClusters
+plot(TopFourClusters)
 
-dat.chicocustomer.cluster <- kmeans(dat.chicocustomer.selected, centers = 3)
-dat.chicocustomer.cluster
-names(dat.chicocustomer.cluster)
-dat.chicocustomer.cluster$centers
+TopFourClusters.Selected <- kmeans(TopFour.Selected, centers = 3)
+TopFourClusters.Selected
+names(TopFourClusters.Selected)
+TopFourClusters.Selected$centers
 
 # fit series of one-way ANOVAs
-lapply(names(dat.chicocustomer.selected), function(x) Anova(lm(paste(x, " ~ cluster"), dat.chicocustomer.selected.clust)))
+lapply(names(TopFour.Selected), function(x) Anova(lm(paste(x, " ~ cluster"), TopFourClusters.Selected)))
 
 autoplot(dat.chicocustomer.cluster, data = dat.chicocustomer, frame = TRUE)
 
