@@ -35,7 +35,6 @@ LineFit
 TopFour.Selected <- TopFour[, c( "G", "xGF", "CorsiFor")] 
 set.seed(500)
 
-TopFour <- na.omit(TopFour.Selected)
 
 TopFourCluster <- clusGap(TopFour.Selected, FUN = kmeans, K.max = 10, B = 3)
 findClusters
@@ -50,10 +49,10 @@ TopFourCluster$centers
 TopFour.Selected %>%
   as_tibble() %>%
   mutate(cluster = TopFourCluster$cluster,
-         Player = row.names(TopFour)) %>%
-  ggplot(aes(G, xGF, color = factor(cluster), label = Player)) +
+         Team = row.names(TopFour)) %>%
+  ggplot(aes(G, xGF, color = factor(cluster), label = Team)) +
   geom_text() +
-  geom_label((aes(fill = Player)))
+  geom_label_repel(aes(G, xGF, fill = Team))
 
 ClusterPlot4 <- fviz_cluster(TopFourCluster, geom = "point",  data = TopFour.Selected) + ggtitle("3 Cluster Solution")
 ClusterPlot4
