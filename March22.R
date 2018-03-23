@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ### Hello its the NHL!
 
 install.packages("factoextra")
@@ -18,16 +17,13 @@ library(ggrepel)
 library(dplyr)
 library(tidytext)
 library(factoextra)
-=======
-### Hello 
->>>>>>> 2df006082d747711b962ed815f2fa6aee58ce817
+
 
 
 ###----------------------------------------------------------------###
 
 TopFour <- read.csv("Skaters_March22_v2.csv", header = TRUE , sep = "," , stringsAsFactors = FALSE)
 
-<<<<<<< HEAD
 ###----------------------------------------------------------------###
 
 LineFit <- lm(G ~ CorsiFor, data = TopFour)
