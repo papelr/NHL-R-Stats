@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### Hello its the NHL!
 
 install.packages("factoextra")
@@ -58,3 +59,5 @@ TopFour.Selected %>%
 ClusterPlot4 <- fviz_cluster(TopFourCluster, geom = "point",  data = TopFour.Selected) + ggtitle("3 Cluster Solution")
 ClusterPlot4
 
+=======
+>>>>>>> f5ecbb9c72ecf4d4b9253c6e2a5ccd5b3c8ead80
