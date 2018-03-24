@@ -34,14 +34,14 @@ TopFourPlot <- ggplot(TopFour, aes(x = CorsiFor, y = G, color = Team)) +
                        geom_point(size= 2, shape = 7) +
                        geom_text_repel(aes(label = Player), 
                                        show.legend = FALSE, 
-                                       angle = 30, size = 5, 
+                                       angle = 30, size = 2.75, 
                                        force = 15, 
-                                       segment.alpha = .05) +
-                       scale_color_manual(values = TeamColors)
+                                       segment.alpha = .25) 
 
 TopFourPlot <- TopFourPlot + 
                 coord_cartesian(xlim = c(40, 60), ylim = c(-5, 40)) + 
-                geom_smooth(method = "lm", se = FALSE, size = 0.5, color = "black") 
+                geom_smooth(method = "lm", se = FALSE, size = 0.5, color = "black") +
+                scale_color_manual(values = TeamColors)
 
 TopFourPlot <- TopFourPlot + 
                 ggtitle(expression(atop("Corsi % vs. Goals per Player", atop(italic("Top Four NHL Teams"))))) +
