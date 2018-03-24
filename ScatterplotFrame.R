@@ -56,5 +56,7 @@ TopFourPlot <- TopFourPlot +
                                  #min.segment.length = 6, force = 20)
                                   
 TopFourPlot
+Hello
+
 
 
