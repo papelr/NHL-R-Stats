@@ -31,12 +31,16 @@ fit
 TeamColors <- c(NSH = "darkgoldenrod" , TB = "blue2" , VGK = "darkgreen" , BOS = "firebrick3") 
 
 TopFourPlot <- ggplot(TopFour, aes(x = CorsiFor, y = G, color = Team)) +
-                       geom_point(size= 2, shape = 7, fill = Player) +
-                       geom_text(label = "", show.legend = FALSE) +
+                       geom_point(size= 2, shape = 7) +
+                       geom_text_repel(aes(label = Player), 
+                                       show.legend = FALSE, 
+                                       angle = 30, size = 5, 
+                                       force = 15, 
+                                       segment.alpha = .05) +
                        scale_color_manual(values = TeamColors)
 
 TopFourPlot <- TopFourPlot + 
-                coord_cartesian(xlim = c(40, 60), ylim = c(-10, 40)) + 
+                coord_cartesian(xlim = c(40, 60), ylim = c(-5, 40)) + 
                 geom_smooth(method = "lm", se = FALSE, size = 0.5, color = "black") 
 
 TopFourPlot <- TopFourPlot + 
@@ -56,7 +60,7 @@ TopFourPlot <- TopFourPlot +
                                  #min.segment.length = 6, force = 20)
                                   
 TopFourPlot
-Hello
+
 
 
 
