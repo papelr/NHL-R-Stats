@@ -30,14 +30,15 @@ LineFit
 
 
 PlayerPlot <- ggplot(BOS_NSH, aes(x = Corsi, y = RelCF, color = Team)) + 
-  geom_point(size = 2, 
+  geom_point(size = 2.75, 
              shape = 15, 
              show.legend = TRUE) +
   coord_cartesian(xlim = c(40, 60), ylim = c(-10, 10)) + 
   geom_smooth(method = "lm", 
               se = FALSE, 
               size = 0.3, 
-              color = "black")
+              color = "black", 
+              weight = 0.5)
 
 PlayerPlot <- PlayerPlot +
   ggtitle(expression(atop("Corsi vs. Relative Corsi", atop(italic("Boston vs. Nashville (All Positions)"))))) +
@@ -46,11 +47,13 @@ PlayerPlot <- PlayerPlot +
   theme(axis.title.x = element_text(size = 12, face = "bold", color = "black")) 
 
 PlayerPlot <- PlayerPlot +
-  geom_label_repel(aes(label = Player), 
+  geom_text_repel(aes(label = Player), 
                    show.legend = FALSE,
                    min.segment.length = 3,
-                   force = 4
-                   )
+                   force = 4,
+                   color = "black", 
+                   size = 3.55) +
+  theme_bw()
                    
 PlayerPlot
 
