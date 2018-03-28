@@ -62,15 +62,9 @@ PlayerPlot <- PlayerPlot +
                    
 PlayerPlot
 
-PlayerPlot <- ggsave(NHLSkaterPlots, 
-                     plot = PlayerPlot(), 
-                     device = "png", 
-                     path = Users/robertpapel/Documents/NHL R Stuff/NHLSkaterPlots, 
-                     scale = 1, 
-                     width = NA, 
-                     height = NA, 
-                     units = "in", 
-                     limitsize = TRUE)
+
+
+PlayerPlot
 
 
 
