@@ -20,6 +20,7 @@ library(factoextra)
 
 BOS_NSH <- read.csv("March26_NSH_BOS.csv", header = TRUE , sep = "," , stringsAsFactors = FALSE)
 
+
 #### ------------------------------------------------------####
 
 LineFit <- lm(Corsi ~ RelCF, data = BOS_NSH)

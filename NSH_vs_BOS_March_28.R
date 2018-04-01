@@ -16,7 +16,7 @@ library(ggplot2)
 library(ggrepel)
 library(dplyr)
 library(tidytext)
-library(factoextra)
+
 
 #### ------------------------------------------------------####
 

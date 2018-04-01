@@ -14,4 +14,15 @@ library(ggrepel)
 library(dplyr)
 library(tidytext)
 
-BOS_NSH <- read.csv("BOS_NSH_March_28.csv", header = TRUE , sep = "," , stringsAsFactors = FALSE)
+#' **CSV file**
+
+Teams <- read.csv("team_stats_2018-03-30.csv", header = TRUE , sep = "," , stringsAsFactors = FALSE)
+
+#' **Bar Plot**
+
+Plot <- ggplot(data = Teams, aes(x = Team, y = GP, fill = Team)) +
+  geom_col(aes(fill = GP, color = Team), show.legend = FALSE) + 
+  coord_flip()
+ 
+Plot
+
