@@ -32,7 +32,9 @@ team_points_df <- data.frame(Team = team_names, Points = points_data)
 str(team_points_df)
 
 
-ggplot(team_points_df, aes(x = Team, y = Points, fill = Team)) +
+#'#### **Visualization** #####
+
+ggplot(team_points_df, aes(x = Team, y = Points, color = Team)) +
   geom_col(show.legend = FALSE) +
   coord_flip() 
 
