@@ -88,4 +88,11 @@ ggplot(team_points_df,
   )
 
 
+# scale_x_continuous(breaks = 2008:2017) +
+  # labs(x = "Year", 
+       # y = "Market Share",
+       # color = "Brand",
+       # title = "Monster's Epic Rise over Other Energy Drinks")
+
+
 
