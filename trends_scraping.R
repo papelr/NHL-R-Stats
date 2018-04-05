@@ -14,12 +14,12 @@ library(gtrendsR)
 
 results <- gtrends(keyword = c("Predators", "Nashville", "Playoffs"),
                    geo = "US", 
-                   time = "all")
+                   time = "2010-01-01 2018-04-05")
 
 
 #'### **Line Graphs** ####
 
-keyword_levels <- c("Predators", "Nashville", "Playoffs")
+keyword_levels <- c("Predators","Nashville", "Playoffs")
 
 results$interest_over_time %>% 
   as_tibble() %>% 
@@ -28,4 +28,4 @@ results$interest_over_time %>%
     keyword = factor(keyword, levels = keyword_levels)
   ) %>% 
   ggplot(aes(x = date, y = interest, color = keyword)) +
-  geom_line()
+  geom_line() 
