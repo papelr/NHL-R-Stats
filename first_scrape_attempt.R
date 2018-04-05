@@ -35,7 +35,7 @@ str(team_points_df)
 
 #'#### **Visualization** #####
 
-teamColor <- c("#FC4C02", 
+teamColor <- c("#FC4C02", # Arizona
                "#8C2633", 
                "#FFB81C", 
                "#041E42",
@@ -65,7 +65,7 @@ teamColor <- c("#FC4C02",
                "#00843D", 
                "#B9975B", 
                "#041E42", 
-               "#53565A")
+               "#53565A") # Winnipeg
 
 # Team colors, in order by alphabetical order, from:
 # https://teamcolorcodes.com/winnipeg-jets-color-codes/
@@ -73,7 +73,7 @@ teamColor <- c("#FC4C02",
 ggplot(team_points_df, 
        aes(x = reorder(Team, Points), y = Points, fill = Team)) +
   geom_col(show.legend = FALSE) +
-  coord_flip() + 
+  coord_flip() +
   scale_fill_manual(values = teamColor)
 
 
