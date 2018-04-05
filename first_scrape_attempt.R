@@ -10,6 +10,7 @@ library(dplyr)
 url <- "http://www.espn.com/nhl/standings/_/group/league"
 webpage <- read_html(url)
 
+
 #'#### **Team Names** #####
 
 team_names_data_html <-  html_nodes(webpage, ".hide-mobile a")
@@ -35,36 +36,36 @@ str(team_points_df)
 
 #'#### **Visualization** #####
 
-teamColor <- c("#FC4C02", # Arizona
-               "#8C2633", 
-               "#FFB81C", 
-               "#041E42",
-               "#C8102E", 
-               "#CC0000", 
-               "#C8102E", 
-               "#6F263D", 
-               "#041E42", 
-               "#006341", 
-               "#C8102E", 
-               "#041E42", 
-               "#B9975B", 
-               "#000000", 
-               "#154734", 
-               "#A6192E", 
-               "#FFB81C", 
-               "#C8102E", 
-               "#00468B", 
-               "#0038A8", 
-               "#C8102E", 
-               "#FA4616", 
-               "#CFC493", 
-               "#003087", 
-               "#006272", 
-               "#00205B", 
-               "#00205B", 
-               "#00843D", 
-               "#B9975B", 
-               "#041E42", 
+teamColor <- c("#FC4C02", # Anaheim
+               "#8C2633", # Arizona
+               "#FFB81C", # Boston
+               "#041E42", # Buffalo
+               "#C8102E", # Calgary
+               "#CC0000", # Carolina
+               "#C8102E", # Chicago
+               "#6F263D", # Colorado
+               "#041E42", # Columbus
+               "#006341", # Dallas
+               "#C8102E", # Detroit
+               "#041E42", # Edmonton
+               "#B9975B", # Florida
+               "#000000", # Los Angeles
+               "#154734", # Minnesota
+               "#A6192E", # Montreal
+               "#FFB81C", # Nashville
+               "#C8102E", # New Jersey
+               "#00468B", # New York Islanders
+               "#0038A8", # New York Rangers
+               "#C8102E", # Ottowa 
+               "#FA4616", # Philadelhpia
+               "#CFC493", # Pittsburgh
+               "#003087", # St. Louis
+               "#006272", # San Jose
+               "#00205B", # Tampa Bay 
+               "#00205B", # Toronto
+               "#00843D", # Vancouver
+               "#B9975B", # Vegas
+               "#041E42", # Washington
                "#53565A") # Winnipeg
 
 # Team colors, in order by alphabetical order, from:
@@ -73,8 +74,18 @@ teamColor <- c("#FC4C02", # Arizona
 ggplot(team_points_df, 
        aes(x = reorder(Team, Points), y = Points, fill = Team)) +
   geom_col(show.legend = FALSE) +
+  scale_fill_manual(values = teamColor) +
   coord_flip() +
-  scale_fill_manual(values = teamColor)
+  labs(
+    title = "Blank", 
+    subtitle = "Blank",
+    x = "Team",
+    y = "Points"
+    ) +
+  theme(
+    axis.title.y = element_text(size = 12, face = "bold", color = "black"),
+    axis.title.x = element_text(size = 12, face = "bold", color = "black")
+  )
 
 
 
