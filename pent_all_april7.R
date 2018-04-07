@@ -59,8 +59,9 @@ teamColor <- c("#FC4C02", # Anaheim
 
 ggplot(shortHanded, 
        aes(x = PENT, y = SHG, color = Team), show.legend = FALSE) +
-  geom_point(size = 2.75, 
+  geom_point(size = 3, 
              shape = 18) +
+  scale_color_manual(values = teamColor) +
   coord_cartesian(xlim = c(180, 300), ylim = c(0, 14)) + 
   geom_smooth(method = "lm", 
               se = FALSE, 
@@ -73,7 +74,6 @@ ggplot(shortHanded,
        title = "Penalties Taken vs. Short Handed Goals",
        subtitle = "All Teams",
        caption = "Plot by R. Papel, April 7, 2018") +
-  scale_color_manual(values = teamColor) +
   theme(axis.title.y = element_text(size = 10, 
                                     face = "bold", 
                                     color = "black")) +
@@ -81,5 +81,6 @@ ggplot(shortHanded,
                                     face = "bold", 
                                     color = "black")) +
   theme(title = element_text(face = "bold")) 
+
 
   
