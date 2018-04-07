@@ -9,8 +9,9 @@
 #' **Libraries** 
 
 library(tidyverse)
+library(rmarkdown)
 
-finalGame <- read.csv("April7.csv", header = TRUE , sep = "," , stringsAsFactors = FALSE)
+finalGame <- read.csv("April7.csv", header = TRUE, sep = ",", stringsAsFactors = FALSE)
 
 
 #' **Visualizations**
@@ -35,8 +36,12 @@ ggplot(finalGame, aes(x = reorder(Player, ShootPerc),
             aes(label = paste0(iSF))) +
   coord_flip()
 
-  
-  
-  
+
+rmarkdown::render('/Users/robertpapel/Documents/NHL_R_Stuff/NHL-R-Stats v2/CBJ_NSH_82.R')
+
+
+getwd () 
+setwd("/Users/robertpapel/Documents/NHL_R_Stuff/NHL-R-Stats v2")
+
   
 
