@@ -88,7 +88,6 @@ ggplot(team_points_df,
   )
 
 
-
 # scale_x_continuous(breaks = 2008:2017) +
   # labs(x = "Year", 
        # y = "Market Share",

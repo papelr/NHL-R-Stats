@@ -1,7 +1,7 @@
 #' ------------------------
-#' Title: **NSH vs CBJ**
-#' Subtitle: Game 82
-#' Date: April 7, 2018
+#' Title: **NSH vs COL**
+#' Subtitle: Pre-First Round Matchup
+#' Date: April 9, 2018
 #' By: Robert Papel
 #' Theme: Amateur AF!
 #' ------------------------

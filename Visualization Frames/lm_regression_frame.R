@@ -1,7 +1,7 @@
 #' -------------------
-#' Title: Penalties Taken vs. Shorthanded Goals Scored
+#' Title: Scatter Plot Frame, for Linear Regression
 #' Subtitle: By all NHL teams, end of season
-#' Date: April 7, 2018
+#' Date: April 9, 2018
 #' By: Robert Papel
 #' --------------------
 
@@ -20,9 +20,9 @@ LineFit <- shortHanded %>%
   lm(SHG ~ PENT, data = .) %>%  # DV
   summary() 
 
-qqPlot(LineFit, main = "QQ Plot")
-leveragePlots(LineFit)
-spreadLevelPlot(LineFit)
+# qqPlot(LineFit, main = "QQ Plot")
+# leveragePlots(LineFit)
+# spreadLevelPlot(LineFit)
 
 
 #' #### **Scatterplot** ####
@@ -83,7 +83,9 @@ pent_shg_lm <- ggplot(shortHanded,
   theme(axis.title.x = element_text(size = 10, 
                                     face = "bold", 
                                     color = "black")) +
-  theme(title = element_text(face = "bold"))
+  theme(title = element_text(face = "bold")) +
+  theme(legend.position = "none")
+pent_shg_lm
 
 # ggsave(plot = pent_shg_lm, filename = "NHL_SHGs.pdf")
 
