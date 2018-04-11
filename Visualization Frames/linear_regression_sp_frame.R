@@ -87,4 +87,5 @@ pent_shg_lm <- ggplot(shortHanded,
 
 # ggsave(plot = pent_shg_lm, filename = "NHL_SHGs.pdf")
 
+
   
