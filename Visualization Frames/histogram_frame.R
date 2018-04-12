@@ -3,39 +3,70 @@
 #' Subtitle: Histogrammmmmmmmmmmmmm of G, xGF, iCF
 #' Date: April 12, 2018
 #' By: Robert Papel
-#' ------------------------
-
-#' **Libraries** 
+#' ----------------------
 
 library(tidyverse)
 library(rmarkdown)
 library(ggrepel)
 library(gridExtra)
+library(cowplot)
 
-firstRound <- read.csv("preds_avs.csv", header = TRUE, sep = ",", stringsAsFactors = FALSE)
+firstRound <- read_csv("preds_avs.csv")
 
 
 #' **Visualizations**
  
-teamColor <- c("#6F263D", # Colorado
-               "#FFB81C") # Nashville
+teamColor <- c("#FFB81C", # Nashville
+               "#6F263D") # Colorado
 
-
-plot1 <- ggplot(firstRound) +
-  geom_histogram(aes(x = ixGF, fill = Team), 
-                 bins = 10,
-                 binwidth = 1,
-                 show.legend = T,
-                 color = "black") +
+NSH1 <- firstRound %>% 
+  filter(Team == "NSH") %>% 
+  mutate(Player = factor(Player)) %>%  
+  ggplot() + 
+  geom_col(aes(x = fct_reorder(Player, ixGF), 
+               y = ixGF, fill = Team),
+               show.legend = F) + 
   scale_fill_manual(values = teamColor) +
-  coord_flip() +
   labs(
-    title = "Goal Count",
-       subtitle = "Goal Count, Both Teams",
-       x = "Goals", 
-       y = "Number of Players",
-       caption = "Stats from Corsia, plot by R. Papel, April 12, 2018"
-       ) +
+    title = "Individual Expected Goals",
+    subtitle = "Colorado & Nashville",
+    x = "Players", 
+    y = NULL
+    # caption = "Stats from Corsia, plot by R. Papel, April 12, 2018"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 12),
+    plot.subtitle = element_text(face = "italic"),
+    axis.ticks = element_line(colour = "grey70", size = 0.2),
+    panel.grid.major = element_line(colour = "grey70", size = 0.2),
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "grey90", 
+                                     size = 3, colour = "white"),
+    legend.text = element_text(face = "bold"),
+    legend.title = element_text(face = "bold"),
+    axis.title.y = element_text(size = 10, face = "bold", color = "black"),
+    axis.title.x = element_text(size = 11, face = "bold", color = "black")
+  ) +
+  ylim(0, 4) +
+  scale_y_continuous(limits = c(0, 28),
+                     breaks = c(0:28)) +
+  coord_flip() 
+
+COL1 <- firstRound %>% 
+  filter(Team == "COL") %>% 
+  mutate(Player = factor(Player)) %>%  
+  ggplot() + 
+  geom_col(aes(x = fct_reorder(Player, ixGF), 
+               y = ixGF, fill = Team),
+           show.legend = F) + 
+  scale_fill_manual(values = "#6F263D") +
+  labs(
+     # title = "Individual Expected Goals",
+     # subtitle = "Nashville & Colorado",
+     x = "Players", 
+     y = "Expected Goals",
+     caption = "Stats from Corsia, plot by R. Papel, April 12, 2018"
+   ) +
   theme(
     plot.title = element_text(face = "bold", size = 12),
     plot.subtitle = element_text(face = "italic"),
@@ -48,23 +79,69 @@ plot1 <- ggplot(firstRound) +
     legend.title = element_text(face = "bold"),
     axis.title.y = element_text(size = 10, face = "bold", color = "black"),
     axis.title.x = element_text(size = 10, face = "bold", color = "black")
-    ) +
-  facet_wrap(~Team, ncol = 2)
-    
+  ) +
+  ylim(0, 4) +
+  scale_y_continuous(limits = c(0, 28),
+                     breaks = c(0:28)) +
+  coord_flip() 
 
-plot2 <- ggplot(firstRound) +
-  geom_histogram(aes(x = IndCorsi, fill = Team), 
-                 bins = 10,
-                 binwidth = 1,
-                 show.legend = T,
-                 color = "black") +
+
+#' **Putting two plots into one graph (or 4?)**
+
+grid.arrange(NSH1, COL1, nrow = 2)
+
+
+
+
+
+
+NSH2 <- firstRound %>% 
+  filter(Team == "NSH") %>% 
+  mutate(Player = factor(Player)) %>%  
+  ggplot() + 
+  geom_col(aes(x = fct_reorder(Player, iCF), 
+               y = iCF, fill = Team),
+           show.legend = F) + 
   scale_fill_manual(values = teamColor) +
-  coord_flip() +
   labs(
-    title = "Goal Count",
-    subtitle = "Goal Count, Both Teams",
-    x = "Goals", 
-    y = "Number of Players",
+    title = "Individual Corsi For",
+    subtitle = "Colorado & Nashville",
+    x = "Players", 
+    y = NULL
+    # caption = "Stats from Corsia, plot by R. Papel, April 12, 2018"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 12),
+    plot.subtitle = element_text(face = "italic"),
+    axis.ticks = element_line(colour = "grey70", size = 0.2),
+    panel.grid.major = element_line(colour = "grey70", size = 0.2),
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill = "grey90", 
+                                     size = 3, colour = "white"),
+    legend.text = element_text(face = "bold"),
+    legend.title = element_text(face = "bold"),
+    axis.title.y = element_text(size = 10, face = "bold", color = "black"),
+    axis.title.x = element_text(size = 11, face = "bold", color = "black")
+  ) +
+  ylim(0, 4) +
+  scale_y_continuous(limits = c(0, 500),
+                     breaks = c(0, 50, 100, 150, 200, 
+                                250, 300, 350, 400, 450, 500)) +
+  coord_flip() 
+
+COL2 <- firstRound %>% 
+  filter(Team == "COL") %>% 
+  mutate(Player = factor(Player)) %>%  
+  ggplot() + 
+  geom_col(aes(x = fct_reorder(Player, iCF), 
+               y = iCF, fill = Team),
+           show.legend = F) + 
+  scale_fill_manual(values = "#6F263D") +
+  labs(
+    # title = "Individual Expected Goals",
+    # subtitle = "Nashville & Colorado",
+    x = "Players", 
+    y = "Corsi For",
     caption = "Stats from Corsia, plot by R. Papel, April 12, 2018"
   ) +
   theme(
@@ -80,31 +157,14 @@ plot2 <- ggplot(firstRound) +
     axis.title.y = element_text(size = 10, face = "bold", color = "black"),
     axis.title.x = element_text(size = 10, face = "bold", color = "black")
   ) +
-  facet_wrap(~Team, ncol = 2)
-  
-#' **Putting two plots into one graph (or 4?)**
+  scale_y_continuous(limits = c(0, 500),
+                     breaks = c(0, 50, 100, 150, 200, 
+                                250, 300, 350, 400, 450, 500)) +
+  coord_flip() 
 
-grid.arrange(plot1, plot2, ncol = 2)
-
-
-
+grid.arrange(NSH1, COL1, NSH2, COL2, nrow = 2)
 
 
 
-
-
-scale_y_continuous(limits = c(0,24), 
-                     breaks = c(1:24)) +
-  coord_cartesian(ylim = c(0, 24)) +
-  geom_text(nudge_y = 0.73, size = 2.80,
-            aes(label = paste0(iSF, " Shots"))) +
-  coord_flip() +
-  theme(
-    plot.title = element_text(face = "bold", size = 12),
-    legend.background = element_rect(fill = "white", size = 4, colour = "white"),
-    axis.ticks = element_line(colour = "grey70", size = 0.2),
-    panel.grid.major = element_line(colour = "grey70", size = 0.2),
-    panel.grid.minor = element_blank()
-  )
 
 
