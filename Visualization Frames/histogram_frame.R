@@ -20,7 +20,8 @@ teamColor <- c("#6F263D", # Colorado
 
 
 ggplot(firstRound) +
-  geom_histogram(aes(x = G, fill = Team), bins = 10) +
+  geom_histogram(aes(x = G, color = Team), bins = 10) +
+  scale_color_manual(values = teamColor) +
   coord_flip() +
   labs(title = "Goal Count",
        subtitle = "Goal Count, Both Teams",
@@ -32,8 +33,12 @@ ggplot(firstRound) +
     axis.ticks = element_line(colour = "grey70", size = 0.2),
     panel.grid.major = element_line(colour = "grey70", size = 0.2),
     panel.grid.minor = element_blank(),
-    legend.position = "none")
-
+    legend.background = element_rect(fill = "grey90", 
+                                     size = 3, colour = "white"),
+    legend.text = element_text(face = "bold"),
+    legend.title = element_text(face = "bold")) +
+  facet_wrap(~G, Team, ncol = 2)
+    
 
   scale_y_continuous(limits = c(0,24), 
                      breaks = c(1:24)) +
