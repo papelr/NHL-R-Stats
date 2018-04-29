@@ -12,6 +12,7 @@ library(tm)
 library(stringr)
 library(lettercase)
 
+
 secondRound <- read.csv("wpg_nsh_april.csv")
 str(secondRound)
 head(secondRound)
