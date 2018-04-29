@@ -11,6 +11,8 @@ library(tidyverse)
 library(tm)
 library(stringr)
 library(lettercase)
+library(scales)
+library(ggrepel)
 
 secondRound <- read.csv("wpg_nsh_april.csv")
 str(secondRound)
@@ -22,8 +24,9 @@ secondRound$Player <- gsub("[[:punct:]]", " ", secondRound$Player, fixed = F)
 secondRound$Player <- tolower(secondRound$Player)
 secondRound$Player <- str_cap_words(secondRound$Player)
 secondRound$Player <- gsub("([a-z])([A-Z])", "\\1 \\2", secondRound$Player)
+secondRound
 
-#'###### ---------------**Modeling**-------------------- ######
+#'###### ---------------**Modeling & Visual**-------------------- ######
 
 secondRound %>% 
   select(Player, xGF, CorsiForPerc, Team) %>%
@@ -31,6 +34,7 @@ secondRound %>%
   geom_point(aes(xGF, CorsiForPerc, color = Team), 
              shape = 18, size = 2) +
   scale_color_manual(values = c("#FFB81C", "#53565A")) +
+  geom_label(xGF, CorsiForPerc, label = "Player") +
   theme_bw() +
   labs(
     title = "Expected Goals vs. Corsi Percentage",
@@ -48,7 +52,11 @@ secondRound %>%
     legend.background = element_rect(color = "grey70"), 
     axis.title.y = element_text(size = 11, face = "bold", color = "black"),
     axis.title.x = element_text(size = 11, face = "bold", color = "black")
-  ) 
+  ) +
+  scale_y_continuous(labels = function(x) paste0(x, "%"))
+
+
+#'###### ---------------**ggsave**-------------------- ######
 
 
 /Users/robertpapel/Documents/Personal_R_Stuff/NHL-R-Stats
