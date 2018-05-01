@@ -58,11 +58,14 @@ penalties_taken <- secondRound %>%
   ) 
 penalties_taken
 
+
 #'###### ---------------**ggsave**-------------------- ######
 
-ggsave(xGF_CorsiForPerc, file = "/Users/robertpapel/Documents/Personal_R_Stuff/NHL-R-Stats/Plots (ggsave)/xGF_CorsiForPerc_April29.png", 
+ggsave(
+  penalties_taken, file = "/Users/robertpapel/Documents/Personal_R_Stuff/NHL-R-Stats/Plots (ggsave)/penalites_taken_April29.png", 
        device = "png",
        width = 10,
-       height = 7)
+       height = 7
+  )
 
 
